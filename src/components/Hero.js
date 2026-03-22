@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowDown, Download, ExternalLink } from 'lucide-react';
+import profile from "../assets/profile.jpg";
 
 const Hero = () => {
   const containerVariants = {
@@ -48,12 +49,12 @@ const Hero = () => {
             className="mb-8"
           >
             <div className="relative inline-block">
-              <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-primary-500 shadow-2xl">
+                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-primary-500 shadow-2xl shadow-primary-500/30">
                 <img
-                  src="https://via.placeholder.com/400x400/3b82f6/ffffff?text=PROFILE"
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
+                src={profile}
+                alt="Profile"
+                className="w-full h-full object-cover hover:scale-110 transition duration-300"
+/>
               </div>
               <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-gray-900"></div>
             </div>
@@ -145,7 +146,7 @@ const Hero = () => {
             </motion.a>
             <motion.a
               whileHover={{ scale: 1.2, rotate: 5 }}
-              href="mailto: ayushbangwal0@gmail.com"
+              href="mailto:ayushbangwal0@gmail.com"
               className="text-gray-400 hover:text-primary-400 transition-colors"
             >
               <Mail size={24} />
