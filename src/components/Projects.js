@@ -41,7 +41,7 @@ const Projects = () => {
     
   ];
 
-  const categories = ['all', 'web', 'ai'];
+  const categories = ['all', 'web'];
 
   const filteredProjects = filter === 'all' 
     ? projects 
@@ -74,11 +74,12 @@ const Projects = () => {
     const Icon = project.icon;
     
     return (
-      <motion.div
-        variants={itemVariants}
-        whileHover={{ 
-  y: -10,
-  scale: 1.02,
+          <motion.div
+  id={`project-${project.id}`}
+  variants={itemVariants}
+  whileHover={{ 
+    y: -10,
+  scale: 1.03,
   boxShadow: '0 25px 50px rgba(0,0,0,0.3)'
 }}
       className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden 
@@ -110,34 +111,40 @@ const Projects = () => {
 
 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-xs space-y-2 mb-2">
   {/*Always  show problem  */}
-  <p className="bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md">
+  <p className="bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md shadow-sm">
   <span className="text-blue-500 font-semibold">Problem:</span> {project.problem}
 </p>
 
 
    {/* Show extra only when expanded */}
- {expandedId === project.id && (
-  <motion.div
-    initial={{ opacity: 0, height: 0 }}
-    animate={{ opacity: 1, height: "auto" }}
-    transition={{ duration: 0.3 }}
-    className="space-y-2 mt-2 border-t border-gray-300 dark:border-gray-700 pt-2"
-  >
-   <p>
-    <span className="text-green-500 font-semibold">Solution:</span> {project.solution}
-  </p>
+ <motion.div
+  layout
+  initial={false}
+  animate={{
+    height: expandedId === project.id ? "auto" : 0,
+    opacity: expandedId === project.id ? 1 : 0,
+    marginTop: expandedId === project.id ? 10 : 0
+  }}
+  transition={{ duration: 0.3 }}
+  className="overflow-hidden"
+>
+    <div className={`space-y-3 border-t border-gray-300 dark:border-gray-700 
+${expandedId === project.id ? "mt-4 pt-4" : "mt-0 pt-0"}`}>
+    <p>
+      <span className="text-green-500 font-semibold">Solution:</span> {project.solution}
+    </p>
 
-  <p>
-    <span className="text-purple-500 font-semibold">Impact:</span> {project.impact}
-  </p>
-  </motion.div>
- )}
+    <p>
+      <span className="text-purple-500 font-semibold">Impact:</span> {project.impact}
+    </p>
+  </div>
+</motion.div>
  
 </div>
 <button
-  onClick={() =>
-    setExpandedId(expandedId === project.id ? null : project.id)
-  }
+ onClick={() => {
+  setExpandedId(expandedId === project.id ? null : project.id);
+}}
 className="text-primary-500 text-sm font-semibold mb-4 hover:text-primary-400 transition cursor-pointer flex items-center gap-1 group">
   {expandedId === project.id ? "Show Less ↑" : "Read More ↓"}
 </button>
@@ -199,6 +206,7 @@ className="text-primary-500 text-sm font-semibold mb-4 hover:text-primary-400 tr
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
+        
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -206,6 +214,7 @@ className="text-primary-500 text-sm font-semibold mb-4 hover:text-primary-400 tr
           className="text-center mb-16"
         >
           <motion.h2
+          
             variants={itemVariants}
             className="text-4xl md:text-5xl font-bold mb-4"
           >
@@ -214,7 +223,10 @@ className="text-primary-500 text-sm font-semibold mb-4 hover:text-primary-400 tr
             </span>
           </motion.h2>
           <motion.div
-            variants={itemVariants}
+          
+          variants={itemVariants}
+         
+            
             className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-600 mx-auto rounded-full mb-8"
           />
           <motion.p
@@ -262,6 +274,7 @@ className="text-primary-500 text-sm font-semibold mb-4 hover:text-primary-400 tr
         >
           {filteredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
+            
           ))}
         </motion.div>
 
