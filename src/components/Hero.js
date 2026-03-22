@@ -85,7 +85,8 @@ to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition du
             variants={itemVariants}
             className="text-2xl md:text-3xl text-gray-300 mb-4"
           >
-            Aspiring Software Developer / Engineering Student
+            Full Stack Developer | Building Scalable Web Apps
+         
           </motion.h2>
 
           <motion.p

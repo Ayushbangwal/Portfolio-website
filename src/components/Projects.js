@@ -4,19 +4,20 @@ import { Github, ExternalLink, Database, Globe } from 'lucide-react';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
+  const [expandedId, setExpandedId] = useState(null);
 
   const projects = [
     {
       id: 1,
       title: 'Champion Records',
-      description: 'A comprehensive sports statistics management system that tracks athlete performance, team records, and tournament data with real-time analytics and visualization.',
+      
+      description: 'Sports analytics platform to track performance, records, and real-time insights.',
       problem: 'Manual tracking of player stats was inefficient and error-prone.',
       solution: 'Developed a full-stack system to track, manage and visualize sports data with filters and analytics.',
       impact: 'Reduced manual effort and improved data accuracy and accessibility.',
       
       techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Chart.js'],
       githubUrl:"https://github.com/Ayushbangwal/Champion-Records",
-              // https://github.com/Ayushbangwal/Champion-Records,
       liveUrl: "https://champion-records.vercel.app/",
       category: 'web',
       featured: true,
@@ -31,8 +32,8 @@ const Projects = () => {
       solution: 'Built a responsive portfolio with animations and modern UI.',
       impact: 'Improved professional visibility and personal branding.',
       techStack: ['React', 'Tailwind CSS', 'Framer Motion', 'Lucide React'],
-      githubUrl: 'https://github.com/yourusername/portfolio',
-      liveUrl: 'https://yourportfolio.netlify.app',
+      githubUrl: 'https://github.com/Ayushbangwal/Portfolio-website',
+      liveUrl: 'https://portfolio-website-peach-sigma-81.vercel.app/',
       category: 'web',
       featured: true,
       icon: Globe
@@ -76,10 +77,12 @@ const Projects = () => {
       <motion.div
         variants={itemVariants}
         whileHover={{ 
-          y: -10,
-          boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
-        }}
-        className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group"
+  y: -10,
+  scale: 1.02,
+  boxShadow: '0 25px 50px rgba(0,0,0,0.3)'
+}}
+      className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden 
+      hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 group"
       >
         {/* Project Header */}
         <div className="relative h-48 bg-gradient-to-br from-primary-500 to-accent-500 p-6">
@@ -91,7 +94,7 @@ const Projects = () => {
             )}
           </div>
           <div className="flex items-center justify-center h-full">
-            <Icon className="w-16 h-16 text-white opacity-80" />
+            <Icon className="w-16 h-16 text-white opacity-80 group-hover:scale-110 transition duration-300" />
           </div>
         </div>
 
@@ -105,18 +108,39 @@ const Projects = () => {
   {project.description}
 </p>
 
-<div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-xs 
-space-y-2 mb-4 max-h-24 pr-1 overflow-y-auto scrollbar-thin">
-  <p>
-    <span className="text-blue-500 font-semibold">Problem:</span> {project.problem}
-  </p>
-  <p>
+<div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-xs space-y-2 mb-2">
+  {/*Always  show problem  */}
+  <p className="bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md">
+  <span className="text-blue-500 font-semibold">Problem:</span> {project.problem}
+</p>
+
+
+   {/* Show extra only when expanded */}
+ {expandedId === project.id && (
+  <motion.div
+    initial={{ opacity: 0, height: 0 }}
+    animate={{ opacity: 1, height: "auto" }}
+    transition={{ duration: 0.3 }}
+    className="space-y-2 mt-2 border-t border-gray-300 dark:border-gray-700 pt-2"
+  >
+   <p>
     <span className="text-green-500 font-semibold">Solution:</span> {project.solution}
   </p>
+
   <p>
     <span className="text-purple-500 font-semibold">Impact:</span> {project.impact}
   </p>
+  </motion.div>
+ )}
+ 
 </div>
+<button
+  onClick={() =>
+    setExpandedId(expandedId === project.id ? null : project.id)
+  }
+className="text-primary-500 text-sm font-semibold mb-4 hover:text-primary-400 transition cursor-pointer flex items-center gap-1 group">
+  {expandedId === project.id ? "Show Less ↑" : "Read More ↓"}
+</button>
 
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-2 mb-6">
@@ -143,8 +167,10 @@ space-y-2 mb-4 max-h-24 pr-1 overflow-y-auto scrollbar-thin">
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors"
-            >
+            
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg 
+            bg-gray-900 dark:bg-gray-700 text-white 
+            hover:scale-105 hover:bg-gray-800 transition-all duration-300">
               <Github size={16} />
               Code
             </motion.a>
