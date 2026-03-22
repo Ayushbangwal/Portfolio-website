@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sun, Moon, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 
-const Navbar = ({ isDarkMode, toggleTheme }) => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -51,7 +51,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             className="flex-shrink-0"
           >
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-              Portfolio
+              Ayush Bangwal
             </h1>
           </motion.div>
 
@@ -90,29 +90,15 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
               <Linkedin size={20} />
             </a>
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:ayushbangwal0@gmail.com"
               className="text-gray-400 hover:text-white transition-colors"
             >
               <Mail size={20} />
             </a>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-            >
-              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-            >
-              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"

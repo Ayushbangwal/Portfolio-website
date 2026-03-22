@@ -58,3 +58,14 @@ html {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+/* 🔥 Custom Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}

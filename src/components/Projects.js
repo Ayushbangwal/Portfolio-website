@@ -10,6 +10,10 @@ const Projects = () => {
       id: 1,
       title: 'Champion Records',
       description: 'A comprehensive sports statistics management system that tracks athlete performance, team records, and tournament data with real-time analytics and visualization.',
+      problem: 'Manual tracking of player stats was inefficient and error-prone.',
+      solution: 'Developed a full-stack system to track, manage and visualize sports data with filters and analytics.',
+      impact: 'Reduced manual effort and improved data accuracy and accessibility.',
+      
       techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Chart.js'],
       githubUrl:"https://github.com/Ayushbangwal/Champion-Records",
               // https://github.com/Ayushbangwal/Champion-Records,
@@ -22,6 +26,10 @@ const Projects = () => {
       id: 2,
       title: 'Portfolio Website',
       description: 'A modern, responsive personal portfolio website built with React and Tailwind CSS, featuring smooth animations and dark mode support.',
+      
+      problem: 'No central platform to showcase projects and skills.',
+      solution: 'Built a responsive portfolio with animations and modern UI.',
+      impact: 'Improved professional visibility and personal branding.',
       techStack: ['React', 'Tailwind CSS', 'Framer Motion', 'Lucide React'],
       githubUrl: 'https://github.com/yourusername/portfolio',
       liveUrl: 'https://yourportfolio.netlify.app',
@@ -93,9 +101,22 @@ const Projects = () => {
             {project.title}
           </h3>
           
-          <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
-            {project.description}
-          </p>
+         <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm leading-relaxed">
+  {project.description}
+</p>
+
+<div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-xs 
+space-y-2 mb-4 max-h-24 pr-1 overflow-y-auto scrollbar-thin">
+  <p>
+    <span className="text-blue-500 font-semibold">Problem:</span> {project.problem}
+  </p>
+  <p>
+    <span className="text-green-500 font-semibold">Solution:</span> {project.solution}
+  </p>
+  <p>
+    <span className="text-purple-500 font-semibold">Impact:</span> {project.impact}
+  </p>
+</div>
 
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-2 mb-6">
