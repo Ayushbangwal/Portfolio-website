@@ -10,6 +10,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -61,7 +62,7 @@ const Contact = () => {
       icon: Mail,
       label: 'Email',
       value: 'ayushbangwal0@gmail.com',
-      href: 'ayushbangwal0@gmail.com',
+      href: 'mailto:ayushbangwal0@gmail.com',
       color: 'text-blue-500'
     },
     {
@@ -166,16 +167,39 @@ const Contact = () => {
                       className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300"
                     >
                       <div className={`p-3 bg-white dark:bg-gray-900 rounded-lg ${info.color}`}>
-                        <Icon size={20} />
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                          {info.label}
-                        </div>
-                        <div className="font-medium text-gray-900 dark:text-white">
-                          {info.value}
-                        </div>
-                      </div>
+                        <Icon size={20} /></div>
+
+
+
+                      <div className="flex flex-col">
+  <div className="text-sm text-gray-500 dark:text-gray-400">
+    {info.label}
+  </div>
+
+  <div className="font-medium text-gray-900 dark:text-white flex items-center gap-2">
+    {info.value}
+
+    {info.label === "Email" && (
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          navigator.clipboard.writeText(info.value);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }}
+        className="text-xs px-2 py-1 bg-primary-600/20 hover:bg-primary-600/40 text-primary-400 rounded-md"
+      >
+        Copy
+      </button>
+    )}
+  </div>
+
+  {copied && info.label === "Email" && (
+    <span className="text-green-400 text-xs mt-1">
+      ✅ Copied!
+    </span>
+  )}
+</div>
                     </motion.a>
                   );
                 })}

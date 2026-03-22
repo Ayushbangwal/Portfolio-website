@@ -46,18 +46,29 @@ const Hero = () => {
           {/* Profile Image */}
           <motion.div
             variants={itemVariants}
-            className="mb-8"
-          >
-            <div className="relative inline-block">
-                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-primary-500 shadow-2xl shadow-primary-500/30">
-                <img
-                src={profile}
-                alt="Profile"
-                className="w-full h-full object-cover hover:scale-110 transition duration-300"
-/>
-              </div>
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-gray-900"></div>
-            </div>
+            className="mb-8">
+
+            <div className="relative inline-block group">
+  
+  {/* 🔥 Gradient Glow */}
+  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 
+to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition duration-300"></div>
+
+  {/* 🖼️ Profile Image */}
+    <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-blue-400/40">
+    <img
+      src={profile}
+      alt="Profile"
+      className="w-full h-full object-cover brightness-95 contrast-105 
+      transform group-hover:scale-105 transition duration-300 ease-in-out"
+    />
+  </div>
+
+  {/* 🟢 Online Dot */}
+  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full 
+  border-4 border-gray-900 shadow-md shadow-green-400/40"></div>
+
+</div>
           </motion.div>
 
           {/* Name and Title */}
