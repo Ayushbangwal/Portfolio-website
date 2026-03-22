@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Code, Database, Globe, Zap } from 'lucide-react';
+import { Github, ExternalLink, Database, Globe } from 'lucide-react';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
