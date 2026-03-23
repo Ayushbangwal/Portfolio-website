@@ -4,7 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Certificates from './components/Certificates';
-import Achievements from './components/Achievements';
+import Stats from './components/Stats';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollProgressBar from './components/ScrollProgressBar';
@@ -59,7 +59,7 @@ function App() {
           <About />
           <Projects />
           <Certificates />
-          <Achievements />
+          <Stats />
           <Contact />
         </main>
         <Footer />
