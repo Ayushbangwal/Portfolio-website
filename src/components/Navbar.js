@@ -2,14 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-    };
+    
+     const sections = ["home", "about", "projects", "certificates", "stats", "contact"];
+
+    sections.forEach((section) => {
+      const element = document.getElementById(section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActiveSection(section);
+        }
+      }
+    });
+  };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -20,12 +35,14 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
     { name: 'Certificates', href: '#certificates' },
-    { name: 'Stats', href: '#Stats' },
+    { name: 'Stats', href: '#stats' },
     { name: 'Contact', href: '#contact' },
   ];
 
   const handleNavClick = (href) => {
     setIsMobileMenuOpen(false);
+    const id = href.replace("#", "");
+    setActiveSection(id);
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -62,7 +79,12 @@ const Navbar = () => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 dark:hover:bg-gray-800 transition-all duration-200"
+                  
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                activeSection === item.href.replace("#", "")
+                ? "bg-primary-600 text-white"
+                : "text-gray-300 hover:text-white hover:bg-gray-700"
+}`}
                 >
                   {item.name}
                 </button>
