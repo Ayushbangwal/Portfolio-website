@@ -9,6 +9,9 @@ import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
 import cer1 from "../assets/cer1.pdf";
 import cer2 from '../assets/cer2.jpeg';
 import cer3 from '../assets/cer3.pdf';
+import cer4a from '../assets/cer4a.jpeg';
+import cer4b from '../assets/cer4b.jpeg';
+import cer4c from '../assets/cer4c.jpeg';
 
 const Certificates = () => {
   const certificates = [
@@ -44,6 +47,16 @@ const Certificates = () => {
   skills: ["AI", "Web Development", "Face Tracking", "Cursor AI"],
   featured: false,
   linkedin: "https://www.linkedin.com/posts/ayush-bangwal-a1412a323_activity-7341842529924882432-Sd2r?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFG15zABG77lUmmdl0dsJtNydUpCsXeBYVI"
+},
+{
+  id: 4,
+  title: "Diploma in Computer Application & Programming",
+  issuer: "ITDA-CALC (Govt. of Uttarakhand)",
+  date: "2025",
+  certificateUrls: [cer4a, cer4b, cer4c],
+  description: "Completed diploma with Semester I & II including programming, web development, and computer fundamentals.",
+  skills: ["Programming", "Web Development", "Computer Fundamentals"],
+  featured: true
 }
   ];
 
@@ -78,7 +91,7 @@ const Certificates = () => {
           y: -8,
           boxShadow: '0 20px 40px rgba(0,0,0,0.15)'
         }}
-       className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden h-full flex flex-col hover:shadow-2xl transition-all duration-300 group"
+       className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 group"
       
       >
         {/* Certificate Header */}
@@ -104,7 +117,8 @@ const Certificates = () => {
 
         {/* Certificate Content */}
         
-          <div className="p-6 flex flex-col justify-between h-full">
+          
+            <div className="p-6 flex flex-col">
           <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors">
             {certificate.title}
           </h3>
@@ -146,18 +160,37 @@ const Certificates = () => {
           </div>
 
           {/* View Certificate Button */}
-          
+          <div className="mt-4 space-y-3">
           <motion.a
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            href={certificate.certificateUrl}
+            href={certificate.certificateUrls ? certificate.certificateUrls[0] : certificate.certificateUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-auto w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
           >
             <ExternalLink size={16} />
             View Certificate (Image)
           </motion.a>
+         
+          </div>
+
+          {/* 🔥 👉 STEP 6 YAHI ADD KARNA HAI */}
+{certificate.certificateUrls && (
+  <div className="flex gap-2 mt-3">
+    {certificate.certificateUrls.map((url, i) => (
+      <a
+        key={i}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex-1 text-center text-xs px-2 py-1 border border-primary-500 text-primary-500 rounded hover:bg-primary-500 hover:text-white transition"
+      >
+        {i === 0 ? "Sem 1" : i === 1 ? "Sem 2" : "Final"}
+      </a>
+    ))}
+  </div>
+)}
           {/* 🔥 ADD THIS BELOW */}
 {certificate.linkedin && (
   <a
@@ -218,14 +251,13 @@ const Certificates = () => {
     navigation
     autoplay={{delay: 3500, disableOnInteraction: false }}
     loop={true}
-    centeredSlides={true}
+    centeredSlides={false}
     spaceBetween={40}
-    slidesPerView={1.2}
+    slidesPerView={1}
     breakpoints={{
-      640: { slidesPerView: 1.1},
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 2.5},
-    }}
+  768: { slidesPerView: 2 },
+  1024: { slidesPerView: 3 },
+}}
   >
     {certificates.map((certificate) => (
       <SwiperSlide key={certificate.id}>
