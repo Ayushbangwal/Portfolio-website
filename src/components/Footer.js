@@ -38,9 +38,7 @@ const Footer = () => {
     { name: 'Contact', href: '#contact' }
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+
 
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -120,7 +118,7 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-white">Contact Info</h4>
             <div className="space-y-2 text-sm">
               <p className="text-gray-400">
-                <span className="font-medium">Email:</span> ayushbangwal0@gamil.com
+                <span className="font-medium">Email:</span> ayushbangwal0@gmail.com
               </p>
               <p className="text-gray-400">
                 <span className="font-medium">Phone:</span> +91 9259387553
