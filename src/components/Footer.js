@@ -33,7 +33,7 @@ const Footer = () => {
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
     { name: 'Certificates', href: '#certificates' },
-    { name: 'Achievements', href: '#achievements' },
+    { name: 'Stats', href: '#stats' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -44,7 +44,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -53,7 +53,7 @@ const Footer = () => {
             className="md:col-span-1"
           >
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-              Portfolio
+              Ayush Bangwal
             </h3>
             <p className="text-gray-400 mb-4 text-sm leading-relaxed">
               Aspiring software developer passionate about creating innovative solutions and learning new technologies.
@@ -119,41 +119,14 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-white">Contact Info</h4>
             <div className="space-y-2 text-sm">
               <p className="text-gray-400">
-                <span className="font-medium">Email:</span> your.email@example.com
+                <span className="font-medium">Email:</span> ayushbangwal0@gamil.com
               </p>
               <p className="text-gray-400">
-                <span className="font-medium">Phone:</span> +1 (555) 123-4567
+                <span className="font-medium">Phone:</span> +91 9259387553
               </p>
               <p className="text-gray-400">
-                <span className="font-medium">Location:</span> San Francisco, CA
+                <span className="font-medium">Location:</span> Srinagar, Uttarakhand
               </p>
-            </div>
-          </motion.div>
-
-          {/* Newsletter */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <h4 className="text-lg font-semibold mb-4 text-white">Stay Connected</h4>
-            <p className="text-gray-400 mb-4 text-sm">
-              Subscribe to my newsletter for updates on new projects and tech insights.
-            </p>
-            <div className="flex flex-col space-y-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              />
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg font-medium text-sm hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
-              >
-                Subscribe
-              </motion.button>
             </div>
           </motion.div>
         </div>
@@ -169,7 +142,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left mb-4 md:mb-0">
               <p className="text-sm text-gray-400">
-                © {currentYear} Your Name. All rights reserved.
+                © {currentYear} Ayush Bangwal. All rights reserved.
               </p>
               <p className="text-xs text-gray-500 mt-1">
                 Built with React, Tailwind CSS, and lots of{' '}
