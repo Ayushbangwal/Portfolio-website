@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
 import cer1 from "../assets/cer1.pdf";
+import cer2 from '../assets/cer2.jpeg';
 
 const Certificates = () => {
   const certificates = [
@@ -16,6 +17,16 @@ const Certificates = () => {
     skills: ["Data Entry", "MS Excel", "Entrepreneurship", "Business Skills"],
     featured: true,
     linkedin: "https://www.linkedin.com/posts/ayush-bangwal-a1412a323_activity-7317849364016607233-eMhj?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFG15zABG77lUmmdl0dsJtNydUpCsXeBYVI"
+  },
+  {
+    id: 2,
+    title: "Basic Computer Course (12 Months)",
+    issuer: "ICMT Institute",
+    date: "August 2023",
+    certificateUrl: cer2,
+    description: "Completed 12-month computer course including MS Word, Excel, HTML, Photoshop & Tally.",
+    skills: ["MS Word", "Excel", "HTML", "Photoshop", "Tally"],
+    featured: false
   }
   ];
 
@@ -127,7 +138,7 @@ const Certificates = () => {
             className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
           >
             <ExternalLink size={16} />
-            View Certificate
+            View Certificate (Image)
           </motion.a>
           {/* 🔥 ADD THIS BELOW */}
 {certificate.linkedin && (
