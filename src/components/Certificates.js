@@ -1,5 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/navigation';
+import { Autoplay } from 'swiper/modules';
 import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
 import cer1 from "../assets/cer1.pdf";
 import cer2 from '../assets/cer2.jpeg';
@@ -61,7 +66,7 @@ const Certificates = () => {
           y: -8,
           boxShadow: '0 20px 40px rgba(0,0,0,0.15)'
         }}
-       className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden max-w-md hover:shadow-2xl transition-all duration-300 group"
+       className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden h-full flex flex-col hover:shadow-2xl transition-all duration-300 group"
       
       >
         {/* Certificate Header */}
@@ -86,7 +91,8 @@ const Certificates = () => {
         </div>
 
         {/* Certificate Content */}
-        <div className="p-6">
+        
+          <div className="p-6 flex flex-col justify-between h-full">
           <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors">
             {certificate.title}
           </h3>
@@ -135,7 +141,7 @@ const Certificates = () => {
             href={certificate.certificateUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
+            className="mt-auto w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
           >
             <ExternalLink size={16} />
             View Certificate (Image)
@@ -189,31 +195,33 @@ const Certificates = () => {
           </motion.p>
         </motion.div>
 
-        {/* Featured Certificates */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex justify-center"
-        >
-          {certificates.filter(cert => cert.featured).map((certificate) => (
-            <CertificateCard key={certificate.id} certificate={certificate} />
-          ))}
-        </motion.div>
-
-        {/* Other Certificates */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {certificates.filter(cert => !cert.featured).map((certificate) => (
-            <CertificateCard key={certificate.id} certificate={certificate} />
-          ))}
-        </motion.div>
+  variants={containerVariants}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+>
+  <Swiper
+    modules={[Navigation, Autoplay]}
+    navigation
+    autoplay={{delay: 3500, disableOnInteraction: false }}
+    loop={true}
+    centeredSlides={true}
+    spaceBetween={40}
+    slidesPerView={1.2}
+    breakpoints={{
+      640: { slidesPerView: 1.1},
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 2.5},
+    }}
+  >
+    {certificates.map((certificate) => (
+      <SwiperSlide key={certificate.id}>
+        <CertificateCard certificate={certificate} />
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</motion.div>
 
         {/* Verification Note */}
         <motion.div
