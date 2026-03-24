@@ -8,6 +8,7 @@ import { Autoplay } from 'swiper/modules';
 import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
 import cer1 from "../assets/cer1.pdf";
 import cer2 from '../assets/cer2.jpeg';
+import cer3 from '../assets/cer3.pdf';
 
 const Certificates = () => {
   const certificates = [
@@ -32,7 +33,18 @@ const Certificates = () => {
     description: "Completed 12-month computer course including MS Word, Excel, HTML, Photoshop & Tally.",
     skills: ["MS Word", "Excel", "HTML", "Photoshop", "Tally"],
     featured: false
-  }
+  },
+  {
+  id: 3,
+  title: "Artificial Intelligence Bootcamp",
+  issuer: "Smarted Innovations",
+  date: "June 2025",
+  certificateUrl: cer3,
+  description: "Completed 5-day bootcamp on AI by building web-based face tracking using Cursor AI.",
+  skills: ["AI", "Web Development", "Face Tracking", "Cursor AI"],
+  featured: false,
+  linkedin: "https://www.linkedin.com/posts/ayush-bangwal-a1412a323_activity-7341842529924882432-Sd2r?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFG15zABG77lUmmdl0dsJtNydUpCsXeBYVI"
+}
   ];
 
   const containerVariants = {
