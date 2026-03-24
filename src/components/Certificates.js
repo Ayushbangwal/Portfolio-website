@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -14,6 +15,7 @@ import cer4b from '../assets/cer4b.jpeg';
 import cer4c from '../assets/cer4c.jpeg';
 
 const Certificates = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
   const certificates = [
   {
     id: 1,
@@ -164,9 +166,7 @@ const Certificates = () => {
           <motion.a
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            href={certificate.certificateUrls ? certificate.certificateUrls[0] : certificate.certificateUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => setSelectedCert(certificate)}
             className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
           >
             <ExternalLink size={16} />
@@ -266,6 +266,46 @@ const Certificates = () => {
     ))}
   </Swiper>
 </motion.div>
+{selectedCert && (
+  <div 
+    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+    onClick={() => setSelectedCert(null)}
+  >
+    
+    <div 
+      className="bg-white dark:bg-gray-900 p-4 rounded-xl max-w-3xl w-full relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+      
+      {/* ❌ Close button */}
+      <button
+        onClick={() => setSelectedCert(null)}
+        className="absolute top-2 right-2 text-white bg-red-500 px-2 py-1 rounded"
+      >
+        X
+      </button>
+
+      {/* 📸 Slider */}
+      <Swiper
+        modules={[Navigation]}
+        navigation
+        spaceBetween={20}
+        slidesPerView={1}
+      >
+        {(selectedCert.certificateUrls || [selectedCert.certificateUrl]).map((url, i) => (
+          <SwiperSlide key={i}>
+            <img
+              src={url}
+              alt="certificate"
+              className="w-full max-h-[70vh] object-contain rounded"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+    </div>
+  </div>
+)}
 
         {/* Verification Note */}
         <motion.div
