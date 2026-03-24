@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Twitter, Heart, ArrowUp } from 'lucide-react';
 
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -137,16 +138,17 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="border-t border-gray-800 mt-12 pt-8"
+          className="border-t border-gray-700 mt-12 pt-8 bg-gray-900/50 backdrop-blur-sm"
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left mb-4 md:mb-0">
-              <p className="text-sm text-gray-400">
-                © {currentYear} Ayush Bangwal. All rights reserved.
+              <p className="text-sm text-gray-300">
+                
+                © {currentYear} <span className="text-white font-semibold">Ayush Bangwal</span>. All rights reserved.
               </p>
               <p className="text-xs text-gray-500 mt-1">
                 Built with React, Tailwind CSS, and lots of{' '}
-                <Heart size={12} className="inline text-red-500" fill="currentColor" />
+              <Heart size={12} className="inline text-red-500"  fill="currentColor" />
               </p>
             </div>
             
@@ -154,7 +156,8 @@ const Footer = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={scrollToTop}
-              className="p-3 bg-gray-800 rounded-full hover:bg-primary-600 transition-colors duration-300"
+              
+              className="p-3 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
               title="Back to top"
             >
               <ArrowUp size={20} />
