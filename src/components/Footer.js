@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Twitter, Heart, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Mail, Twitter, Heart } from 'lucide-react';
 
 
 const Footer = () => {
@@ -151,17 +151,7 @@ const Footer = () => {
               <Heart size={12} className="inline text-red-500"  fill="currentColor" />
               </p>
             </div>
-            
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={scrollToTop}
-              
-              className="p-3 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
-              title="Back to top"
-            >
-              <ArrowUp size={20} />
-            </motion.button>
+          
           </div>
         </motion.div>
       </div>
