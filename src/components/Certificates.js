@@ -1,75 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
+import cer1 from "../assets/cer1.pdf";
 
 const Certificates = () => {
   const certificates = [
-    {
-      id: 1,
-      title: 'Generative AI with Large Language Models',
-      issuer: 'Coursera - DeepLearning.AI',
-      date: 'March 2024',
-      credentialId: 'ABC123XYZ',
-      certificateUrl: 'https://coursera.org/verify/ABC123XYZ',
-      description: 'Comprehensive course on building applications with large language models, including prompt engineering and fine-tuning techniques.',
-      skills: ['Generative AI', 'LLMs', 'Prompt Engineering', 'Fine-tuning'],
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'Full Stack Web Development Bootcamp',
-      issuer: 'Udemy',
-      date: 'February 2024',
-      credentialId: 'UC-DEF456GHI',
-      certificateUrl: 'https://ude.my/UC-DEF456GHI',
-      description: 'Intensive bootcamp covering modern web development technologies including React, Node.js, MongoDB, and deployment strategies.',
-      skills: ['React', 'Node.js', 'MongoDB', 'Express', 'REST APIs'],
-      featured: true
-    },
-    {
-      id: 3,
-      title: 'Python for Data Science and Machine Learning',
-      issuer: 'Udemy',
-      date: 'January 2024',
-      credentialId: 'UC-JKL789MNO',
-      certificateUrl: 'https://ude.my/UC-JKL789MNO',
-      description: 'Complete Python programming course with focus on data analysis, visualization, and machine learning fundamentals.',
-      skills: ['Python', 'NumPy', 'Pandas', 'Matplotlib', 'Scikit-learn'],
-      featured: false
-    },
-    {
-      id: 4,
-      title: 'AWS Cloud Practitioner',
-      issuer: 'Amazon Web Services',
-      date: 'December 2023',
-      credentialId: 'AWS-CP-PQR456STU',
-      certificateUrl: 'https://aws.amazon.com/verification/PQR456STU',
-      description: 'Foundational understanding of AWS cloud services, architecture, and best practices for cloud computing.',
-      skills: ['AWS', 'Cloud Computing', 'S3', 'EC2', 'Lambda'],
-      featured: false
-    },
-    {
-      id: 5,
-      title: 'React - The Complete Guide',
-      issuer: 'Udemy',
-      date: 'November 2023',
-      credentialId: 'UC-VWX789YZA',
-      certificateUrl: 'https://ude.my/UC-VWX789YZA',
-      description: 'In-depth React course covering hooks, context, Redux, Next.js, and advanced React patterns.',
-      skills: ['React', 'Redux', 'Next.js', 'React Hooks', 'Context API'],
-      featured: false
-    },
-    {
-      id: 6,
-      title: 'JavaScript Algorithms and Data Structures',
-      issuer: 'freeCodeCamp',
-      date: 'October 2023',
-      credentialId: 'FCC-BCD123EFG',
-      certificateUrl: 'https://freecodecamp.org/certification/BCD123EFG',
-      description: 'Mastered fundamental algorithms, data structures, and problem-solving techniques in JavaScript.',
-      skills: ['JavaScript', 'Algorithms', 'Data Structures', 'Problem Solving'],
-      featured: false
-    }
+  {
+    id: 1,
+    title: "Entrepreneurship cum Skill Development Program",
+    issuer: "MSME - Government of India",
+    date: "September 2024",
+    credentialId: "45255/E-SDP/2024-25/12",
+    certificateUrl: cer1,
+    description: "Completed Entrepreneurship cum Skill Development Program focused on data entry operations, business basics, and practical skill training under MSME.",
+    skills: ["Data Entry", "MS Excel", "Entrepreneurship", "Business Skills"],
+    featured: true,
+    linkedin: "https://www.linkedin.com/posts/ayush-bangwal-a1412a323_activity-7317849364016607233-eMhj?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFG15zABG77lUmmdl0dsJtNydUpCsXeBYVI"
+  }
   ];
 
   const containerVariants = {
@@ -103,7 +50,8 @@ const Certificates = () => {
           y: -8,
           boxShadow: '0 20px 40px rgba(0,0,0,0.15)'
         }}
-        className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group"
+       className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden max-w-md hover:shadow-2xl transition-all duration-300 group"
+      
       >
         {/* Certificate Header */}
         <div className={`relative h-32 bg-gradient-to-br ${
@@ -120,7 +68,9 @@ const Certificates = () => {
             )}
           </div>
           <div className="flex items-center h-full">
-            <Award className="w-12 h-12 text-white opacity-90" />
+            <motion.div whileHover={{ rotate: 10 }}>
+  <Award className="w-12 h-12 text-white opacity-90" />
+</motion.div>
           </div>
         </div>
 
@@ -148,8 +98,7 @@ const Certificates = () => {
             {certificate.skills.slice(0, 3).map((skill, index) => (
               <span
                 key={index}
-                className="px-3 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-full border border-primary-200 dark:border-primary-800"
-              >
+              className="px-3 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-full border border-primary-200 dark:border-primary-800 hover:scale-105 hover:shadow-md transition-all">
                 {skill}
               </span>
             ))}
@@ -168,6 +117,7 @@ const Certificates = () => {
           </div>
 
           {/* View Certificate Button */}
+          
           <motion.a
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -179,6 +129,18 @@ const Certificates = () => {
             <ExternalLink size={16} />
             View Certificate
           </motion.a>
+          {/* 🔥 ADD THIS BELOW */}
+{certificate.linkedin && (
+  <a
+    href={certificate.linkedin}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-2 border border-primary-500 text-primary-500 rounded-lg hover:bg-primary-500 hover:text-white transition-all duration-300"
+  >
+    <ExternalLink size={16} />
+    View on LinkedIn
+  </a>
+)}
         </div>
       </motion.div>
     );
@@ -194,6 +156,7 @@ const Certificates = () => {
           whileInView="visible"
           viewport={{ once: true }}
           className="text-center mb-16"
+          
         >
           <motion.h2
             variants={itemVariants}
@@ -221,7 +184,7 @@ const Certificates = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-8 mb-12"
+          className="flex justify-center"
         >
           {certificates.filter(cert => cert.featured).map((certificate) => (
             <CertificateCard key={certificate.id} certificate={certificate} />
