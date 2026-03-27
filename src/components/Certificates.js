@@ -93,15 +93,12 @@ const Certificates = () => {
           y: -8,
           boxShadow: '0 20px 40px rgba(0,0,0,0.15)'
         }}
-       className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 group"
+       className="bg-white/5 border border-white/10 rounded-xl shadow-lg overflow-hidden 
+flex flex-col hover:shadow-2xl transition-all duration-300 group h-full"
       
       >
         {/* Certificate Header */}
-        <div className={`relative h-32 bg-gradient-to-br ${
-          certificate.featured 
-            ? 'from-accent-500 to-primary-600' 
-            : 'from-gray-400 to-gray-600'
-        } p-6`}>
+       <div className="relative h-32 bg-gradient-to-br from-blue-500 to-purple-600 p-6">
           <div className="absolute top-4 right-4">
             {certificate.featured && (
               <span className="bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
@@ -121,11 +118,12 @@ const Certificates = () => {
         
           
             <div className="p-6 flex flex-col">
-          <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors">
+            <h3 className="text-xl font-bold mb-2 text-white group-hover:text-purple-400 transition-colors">
+
             {certificate.title}
           </h3>
           
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-3">
+            <div className="flex items-center gap-2 text-sm text-gray-300 mb-3">
             <span className="font-medium">{certificate.issuer}</span>
             <span>•</span>
             <div className="flex items-center gap-1">
@@ -134,7 +132,7 @@ const Certificates = () => {
             </div>
           </div>
 
-          <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+            <p className="text-gray-300 mb-4 text-sm leading-relaxed">
             {certificate.description}
           </p>
 
@@ -249,7 +247,7 @@ const Certificates = () => {
   <Swiper
     modules={[Navigation, Autoplay]}
     navigation
-    autoplay={{delay: 3500, disableOnInteraction: false }}
+    autoplay={{ delay: 6000, disableOnInteraction: true }}
     loop={true}
     centeredSlides={false}
     spaceBetween={40}
@@ -267,42 +265,63 @@ const Certificates = () => {
   </Swiper>
 </motion.div>
 {selectedCert && (
-  <div 
-    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-    onClick={() => setSelectedCert(null)}
+  <div
+    className="fixed inset-0 bg-black/80 flex items-center 
+    justify-center z-[9999] p-4"
+    onMouseDown={() => setSelectedCert(null)}
   >
-    
-    <div 
-      className="bg-white dark:bg-gray-900 p-4 rounded-xl max-w-3xl w-full relative"
-      onClick={(e) => e.stopPropagation()}
+    <div
+      className="relative bg-gray-900 border border-white/10 
+      rounded-2xl p-4 w-full max-w-3xl"
+      onMouseDown={(e) => e.stopPropagation()}
     >
-      
-      {/* ❌ Close button */}
+      {/* Close Button */}
       <button
-        onClick={() => setSelectedCert(null)}
-        className="absolute top-2 right-2 text-white bg-red-500 px-2 py-1 rounded"
+        type="button"
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          setSelectedCert(null);
+        }}
+        className="absolute -top-3 -right-3 z-10 w-8 h-8 
+        bg-red-500 hover:bg-red-600 text-white rounded-full 
+        flex items-center justify-center text-sm font-bold 
+        shadow-lg transition-colors cursor-pointer"
       >
-        X
+        ✕
       </button>
 
-      {/* 📸 Slider */}
+      {/* Certificate title */}
+      <p className="text-white font-semibold text-center mb-3 
+      text-sm truncate px-6">
+        {selectedCert.title}
+      </p>
+
+      {/* Image/Slider */}
       <Swiper
+        key={selectedCert.id}
         modules={[Navigation]}
         navigation
         spaceBetween={20}
         slidesPerView={1}
       >
-        {(selectedCert.certificateUrls || [selectedCert.certificateUrl]).map((url, i) => (
+        {(selectedCert.certificateUrls || 
+          [selectedCert.certificateUrl]).map((url, i) => (
           <SwiperSlide key={i}>
             <img
               src={url}
-              alt="certificate"
-              className="w-full max-h-[70vh] object-contain rounded"
+              alt={`certificate-${i}`}
+              className="w-full max-h-[75vh] object-contain rounded-lg"
             />
           </SwiperSlide>
         ))}
       </Swiper>
 
+      {/* Slide count (only if multiple) */}
+      {selectedCert.certificateUrls?.length > 1 && (
+        <p className="text-center text-gray-400 text-xs mt-2">
+          Use arrows to navigate between pages
+        </p>
+      )}
     </div>
   </div>
 )}
