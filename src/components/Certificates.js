@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css/navigation';
-import { Autoplay } from 'swiper/modules';
 import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
 import cer1 from "../assets/cer1.pdf";
 import cer2 from '../assets/cer2.jpeg';
@@ -265,10 +264,16 @@ const Certificates = () => {
           viewport={{ once: true }}
         >
           <Swiper
-  modules={[Navigation]}
+  modules={[Navigation, Autoplay]}
   navigation
-  spaceBetween={20}
+  autoplay={{ delay: 6000, disableOnInteraction: true }}
+  loop={true}
+  spaceBetween={30}
   slidesPerView={1}
+  breakpoints={{
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+  }}
 >
   {certificates.map((cert) => (
     <SwiperSlide key={cert.id}>
@@ -288,9 +293,11 @@ const Certificates = () => {
             onMouseDown={() => setSelectedCert(null)}
           >
             <div
-              className="relative bg-gray-900 border border-white/10 rounded-2xl p-4 w-full max-w-3xl"
-              onMouseDown={(e) => e.stopPropagation()}
-            >
+  className="relative bg-gray-900 border border-white/10 
+  rounded-2xl p-6 w-full max-w-4xl max-h-[95vh] 
+  overflow-y-auto"
+  onMouseDown={(e) => e.stopPropagation()}
+>
               {/* Close Button */}
               <button
                 type="button"
@@ -320,18 +327,18 @@ const Certificates = () => {
   {(selectedCert?.certificateUrls || [selectedCert?.certificateUrl]).map((url, i) => (
     <SwiperSlide key={i}>
       {isPdf(url) ? (
-        <div className="w-full h-[75vh] flex flex-col items-center justify-center gap-3">
-          
-          <embed
-            src={url}
-            type="application/pdf"
-            className="w-full h-full rounded-lg"
-          />
+        <div className="w-full flex flex-col gap-3">
+         <iframe
+  src={`${url}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+  className="w-full rounded-lg border-0"
+  style={{ height: '70vh' }}
+  title={`certificate-${i}`}
+/>
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 
+            className="self-center flex items-center gap-2 px-4 py-2 
             bg-gradient-to-r from-blue-500 to-purple-600 
             text-white rounded-lg hover:opacity-90 transition text-sm"
           >
@@ -344,7 +351,7 @@ const Certificates = () => {
         <img
           src={url}
           alt={`certificate-${i}`}
-          className="w-full max-h-[75vh] object-contain rounded-lg"
+          className="w-full max-h-[70vh] object-contain rounded-lg"
         />
       )}
     </SwiperSlide>
