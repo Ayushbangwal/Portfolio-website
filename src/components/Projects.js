@@ -26,12 +26,14 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: 'Portfolio Website',
-      description: 'Modern personal portfolio with animations.',
-      problem: 'No platform to showcase projects.',
-      solution: 'Built responsive portfolio.',
-      impact: 'Improved visibility.',
-      yourRole: 'Designed UI/UX, implemented animations, and deployed on Vercel.',
+      
+  title: 'Portfolio Website',
+  description: 'Modern personal portfolio with animations.',
+  problem: 'Needed a professional platform to showcase skills and projects to recruiters.',
+  solution: 'Built a fully responsive React + Tailwind portfolio with smooth animations, certificate section, and contact form.',
+  impact: 'Live on Vercel — used to apply for internships and freelance projects.',
+  yourRole: 'Solo project — designed UI/UX, wrote all components, deployed on Vercel.',
+     // yourRole: 'Designed UI/UX, implemented animations, and deployed on Vercel.',
       techStack: [
       { name: 'React', icon: FaReact, color: 'text-cyan-400' },
       { name: 'Tailwind', icon: SiTailwindcss, color: 'text-sky-400' }
@@ -48,14 +50,16 @@ const Projects = () => {
 
         <h2 className="text-4xl font-bold text-center mb-12 text-white">Projects</h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+       <div className="grid md:grid-cols-2 gap-6 items-start">
+
 
           {projects.map((project) => {
             const Icon = project.icon;
 
             return (
-              <div key={project.id} className="bg-white/5 backdrop-blur-lg border border-white/10 p-6 rounded-2xl 
-              shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+              <div key={project.id} className="bg-white/5 border border-white/10 p-6 rounded-2xl 
+shadow-lg hover:shadow-purple-500/20 hover:-translate-y-2 transition-all duration-300 
+self-start">
 
                 <div className="h-40 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mb-4 relative">
   <Icon size={50} className="text-white opacity-80" />
@@ -127,10 +131,10 @@ const Projects = () => {
                   href={project.githubUrl} 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg bg-white/10 
-                  hover:bg-white/20 text-gray-300 transition-all duration-300 hover:scale-105">
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-white/10 
+                  hover:bg-white/20 text-white font-medium border border-white/10 hover:border-white/30">
                     <Github size={16} />
-                    code
+                    GitHub
                   </a>
                   <a 
                   href={project.liveUrl} 
