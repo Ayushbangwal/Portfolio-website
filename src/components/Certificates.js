@@ -297,18 +297,22 @@ const Certificates = () => {
   rounded-2xl p-6 w-full max-w-4xl max-h-[95vh] 
   overflow-y-auto"
   onMouseDown={(e) => e.stopPropagation()}
+
 >
+
+  
               {/* Close Button */}
               <button
+                
+                className="sticky top-0 float-right -mr-2 -mt-2 z-10 w-8 h-8 
+                bg-red-500 hover:bg-red-600 text-white rounded-full 
+                flex items-center justify-center text-sm font-bold 
+                shadow-lg transition-colors cursor-pointer"
                 type="button"
                 onMouseDown={(e) => {
                   e.stopPropagation();
                   setSelectedCert(null);
                 }}
-                className="absolute -top-3 -right-3 z-10 w-8 h-8 
-                bg-red-500 hover:bg-red-600 text-white rounded-full 
-                flex items-center justify-center text-sm font-bold 
-                shadow-lg transition-colors cursor-pointer"
               >
                 ✕
               </button>

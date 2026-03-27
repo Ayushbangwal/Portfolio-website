@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowDown, Download, ExternalLink } from 'lucide-react';
-import profile from "../assets/profile.jpg";
+import profile from "../assets/profile.png";
 
 const Hero = () => {
   const containerVariants = {
