@@ -83,7 +83,7 @@ const Projects = () => {
   );
 })}
 </div>
-                  <div className="bg-white/10 p-3 rounded-lg mb-3 border border-white/10">
+                  <div className="bg-white/10 p-3 rounded-lg mb-3 border border-white/20 hover:border-blue-500 transition">
                   <p>
                     <span className="text-blue-500 font-semibold">Problem:</span> {project.problem}
                   </p>
@@ -92,17 +92,21 @@ const Projects = () => {
                     
                       <div className="mt-3 border-t border-white/10 pt-3 bg-gradient-to-r 
                       from-green-500/10 to-purple-500/10 p-3 rounded-lg">
-                     <p>
+                    <p className="text-xs text-gray-400 mb-2 uppercase tracking-wider">
+  Case Study
+</p>
+                     <p className="mb-2">
   <span className="text-green-500 font-semibold">Solution:</span> {project.solution}
 </p>
 
 <p
- className="mt-2">
-  <span className="text-yellow-400 font-semibold">Your Role:</span> 
+ className="mt-2 mb-2">
+  <span className="text-yellow-400 font-semibold tracking-wide">Role:</span> 
   <span className="text-gray-300"> {project.yourRole}</span>
+  
 </p>
 
-<p>
+<p className="mt-2 mb-2">
   <span className="text-purple-500 font-semibold">Impact:</span> {project.impact}
 </p>
                     </div>
@@ -113,7 +117,7 @@ const Projects = () => {
                   onClick={() =>
                     setExpandedId(expandedId === project.id ? null : project.id)
                   }
-                  className="text-primary-400 hover:text-primary-300 font-semibold transition"
+                  className="text-blue-400 hover:text-blue-300 font-semibold underline underline-offset-4 transition"
                 >
                   {expandedId === project.id ? "Show Less" : "Read More"}
                 </button>
