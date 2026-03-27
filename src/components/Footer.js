@@ -136,11 +136,13 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="border-t border-gray-700 mt-12 pt-8 bg-gray-900/50 backdrop-blur-sm"
+          
+          className="border-t border-gray-700/50 mt-12 py-6 bg-gray-900/50 backdrop-blur-sm"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-center md:text-left mb-4 md:mb-0">
-              <p className="text-sm text-gray-300">
+          
+            <div className="flex flex-col items-center justify-center text-center gap-1">
+            
+              <p className="text-sm text-gray-300 tracking-wide leading-relaxed">
                 
                 © {currentYear} <span className="text-white font-semibold">Ayush Bangwal</span>. All rights reserved.
               </p>
@@ -148,7 +150,7 @@ const Footer = () => {
                 Built with React, Tailwind CSS, and lots of{' '}
               <Heart size={12} className="inline text-red-500"  fill="currentColor" />
               </p>
-            </div>
+            
           
           </div>
         </motion.div>
