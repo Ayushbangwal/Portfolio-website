@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowDown, Download, ExternalLink } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
 import profile from "../assets/profile.png";
 
 const Hero = () => {
@@ -76,25 +77,38 @@ to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition du
             variants={itemVariants}
             className="text-5xl md:text-7xl font-bold mb-4"
           >
-            <span className="bg-gradient-to-r from-primary-400 via-accent-400 to-primary-400 bg-clip-text text-transparent">
-              Ayush Bangwal
-            </span>
+            <span className="bg-gradient-to-r from-blue-400 
+via-purple-400 to-blue-400 bg-clip-text text-transparent">
+  Ayush Bangwal
+</span>
           </motion.h1>
 
           <motion.h2
-            variants={itemVariants}
-            className="text-2xl md:text-3xl text-gray-300 mb-4"
-          >
-            Full Stack Developer | Building Scalable Web Apps
-         
-          </motion.h2>
+  variants={itemVariants}
+  className="text-2xl md:text-3xl text-gray-300 mb-4"
+>
+  <TypeAnimation
+    sequence={[
+      'Full Stack Developer', 4000,
+      'React Developer', 4000,
+      'Node.js Developer', 4000,
+      'AI Enthusiast', 4000,
+      'Open Source Contributor', 4000,
+    ]}
+    wrapper="span"
+    speed={50}
+    deletingSpeed={70}
+    repeat={Infinity}
+    cursor={true}
+  />
+</motion.h2>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto"
-          >
-             "Build real-world web apps and AI-based projects"
-          </motion.p>
+<motion.p
+  variants={itemVariants}
+  className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto"
+>
+  Building scalable web apps and AI-based projects 
+</motion.p>
 
           {/* CTA Buttons */}
           <motion.div
@@ -105,7 +119,9 @@ to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition du
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+               className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg 
+              shadow-lg hover:opacity-90 transition-all duration-300 
+              flex items-center justify-center gap-2"
             >
               View Projects
               <ExternalLink size={20} />
@@ -115,7 +131,11 @@ to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition du
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 bg-transparent border-2 border-primary-500 text-primary-400 font-semibold rounded-lg hover:bg-primary-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+              className="px-8 py-3 bg-transparent border-2 
+  border-blue-500 text-blue-400 font-semibold 
+  rounded-lg hover:bg-blue-500 hover:text-white 
+  transition-all duration-300 flex items-center 
+  justify-center gap-2"
             >
               Contact Me
               <Mail size={20} />
@@ -143,7 +163,8 @@ to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition du
               href="https://github.com/Ayushbangwal"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-primary-400 transition-colors"
+              className="text-gray-400 hover:text-blue-400 transition-colors"
+
             >
               <Github size={24} />
             </motion.a>
@@ -152,14 +173,17 @@ to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition du
               href="https://linkedin.com/in/ayush-bangwal-a1412a323/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-primary-400 transition-colors"
+              
+              className="text-gray-400 hover:text-blue-400 transition-colors"
+
             >
               <Linkedin size={24} />
             </motion.a>
             <motion.a
               whileHover={{ scale: 1.2, rotate: 5 }}
               href="mailto:ayushbangwal0@gmail.com"
-              className="text-gray-400 hover:text-primary-400 transition-colors"
+              
+              className="text-gray-400 hover:text-blue-400 transition-colors"
             >
               <Mail size={24} />
             </motion.a>

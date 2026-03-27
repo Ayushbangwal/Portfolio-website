@@ -34,8 +34,7 @@ const Stats = () => {
 ];
 
   return (
-    <section id="stats"
-    className="py-20 bg-gray-100 dark:bg-gray-900">
+   <section id="stats" className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -49,7 +48,8 @@ const Stats = () => {
             variants={itemVariants}
             className="text-4xl md:text-5xl font-bold mb-4"
           >
-            <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+           <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+
               My Stats
             </span>
           </motion.h2>
