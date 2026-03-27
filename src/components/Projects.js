@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Database, Globe, Github, ExternalLink } from 'lucide-react';
-
+import { FaReact, FaNodeJs } from "react-icons/fa";
+import { SiMongodb, SiTailwindcss } from "react-icons/si";
 const Projects = () => {
   const [expandedId, setExpandedId] = useState(null);
 
@@ -12,7 +13,12 @@ const Projects = () => {
       problem: 'Manual tracking of player stats was inefficient and error-prone.',
       solution: 'Developed a full-stack system to track, manage and visualize sports data.',
       impact: 'Reduced manual effort and improved accuracy.',
-      techStack: ['React', 'Node.js', 'MongoDB'],
+      techStack: [
+  { name: 'React', icon: FaReact, color: 'text-cyan-400' },
+  { name: 'Node.js', icon: FaNodeJs, color: 'text-green-500' },
+  { name: 'MongoDB', icon: SiMongodb, color: 'text-green-400' }
+],
+      
       githubUrl: "https://github.com/Ayushbangwal/Champion-Records",
       liveUrl: "https://champion-records.vercel.app/",
       icon: Database
@@ -24,7 +30,10 @@ const Projects = () => {
       problem: 'No platform to showcase projects.',
       solution: 'Built responsive portfolio.',
       impact: 'Improved visibility.',
-      techStack: ['React', 'Tailwind'],
+      techStack: [
+      { name: 'React', icon: FaReact, color: 'text-cyan-400' },
+      { name: 'Tailwind', icon: SiTailwindcss, color: 'text-sky-400' }
+],
       githubUrl: 'https://github.com/Ayushbangwal/Portfolio-website',
       liveUrl: 'https://portfolio-website-peach-sigma-81.vercel.app/',
       icon: Globe
@@ -58,14 +67,19 @@ const Projects = () => {
 
                 <p className="text-gray-300 mb-3">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-  {project.techStack.map((tech, index) => (
-    <span 
-      key={index} 
-      className="text-xs bg-white/10 px-3 py-1 rounded-full text-gray-300"
+ {project.techStack.map((tech, index) => {
+  const Icon = tech.icon;
+
+  return (
+    <div
+      key={index}
+      className="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-gray-300 hover:scale-105 transition"
     >
-      {tech}
-    </span>
-  ))}
+      <Icon className={`${tech.color} text-sm`} />
+      <span className="text-xs">{tech.name}</span>
+    </div>
+  );
+})}
 </div>
                   <div className="bg-white/10 p-3 rounded-lg mb-3 border border-white/10">
                   <p>
