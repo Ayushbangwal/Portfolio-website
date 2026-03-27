@@ -13,6 +13,7 @@ const Projects = () => {
       problem: 'Manual tracking of player stats was inefficient and error-prone.',
       solution: 'Developed a full-stack system to track, manage and visualize sports data.',
       impact: 'Reduced manual effort and improved accuracy.',
+      yourRole: 'Designed frontend UI, developed backend APIs, and integrated database for real-time stats.',
       techStack: [
   { name: 'React', icon: FaReact, color: 'text-cyan-400' },
   { name: 'Node.js', icon: FaNodeJs, color: 'text-green-500' },
@@ -30,6 +31,7 @@ const Projects = () => {
       problem: 'No platform to showcase projects.',
       solution: 'Built responsive portfolio.',
       impact: 'Improved visibility.',
+      yourRole: 'Designed UI/UX, implemented animations, and deployed on Vercel.',
       techStack: [
       { name: 'React', icon: FaReact, color: 'text-cyan-400' },
       { name: 'Tailwind', icon: SiTailwindcss, color: 'text-sky-400' }
@@ -90,12 +92,19 @@ const Projects = () => {
                     
                       <div className="mt-3 border-t border-white/10 pt-3 bg-gradient-to-r 
                       from-green-500/10 to-purple-500/10 p-3 rounded-lg">
-                      <p>
-                        <span className="text-green-500 font-semibold">Solution:</span> {project.solution}
-                      </p>
-                      <p>
-                        <span className="text-purple-500 font-semibold">Impact:</span> {project.impact}
-                      </p>
+                     <p>
+  <span className="text-green-500 font-semibold">Solution:</span> {project.solution}
+</p>
+
+<p
+ className="mt-2">
+  <span className="text-yellow-400 font-semibold">Your Role:</span> 
+  <span className="text-gray-300"> {project.yourRole}</span>
+</p>
+
+<p>
+  <span className="text-purple-500 font-semibold">Impact:</span> {project.impact}
+</p>
                     </div>
                   )}
                 </div>
