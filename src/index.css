@@ -2,54 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
-
-/* Smooth scrolling */
+/* ===== SCROLL ===== */
 html {
   scroll-behavior: smooth;
-}
-html {
   scroll-padding-top: 70px;
 }
 
-/* Custom animations */
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8b5cf6, #3b82f6);
+}
+
+/* ===== SWIPER CARDS ===== */
+.swiper-slide {
+  height: auto;
+  opacity: 0.8;
+  transform: scale(0.97);
+  transition: all 0.3s ease;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== SWIPER ARROWS ===== */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #3b82f6 !important;
+  transform: scale(0.75);
+  transition: transform 0.2s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #8b5cf6 !important;
+  transform: scale(0.9);
+}
+
+/* ===== GRADIENT ANIMATION ===== */
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .gradient-bg {
-  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+  background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #ec4899, #6366f1);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
 
-/* Loading animation */
+/* ===== LOADING SPINNER ===== */
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .loader {
-  border: 3px solid #f3f3f3;
+  border: 3px solid rgba(255,255,255,0.1);
   border-top: 3px solid #3b82f6;
   border-radius: 50%;
   width: 40px;
@@ -57,41 +82,16 @@ html {
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-/* 🔥 Custom Scrollbar */
+/* ===== THIN SCROLLBAR (modal etc) ===== */
 .scrollbar-thin::-webkit-scrollbar {
   width: 4px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  border-radius: 999px;
 }
+
 .scrollbar-thin::-webkit-scrollbar-track {
   background: transparent;
-}
-.swiper-slide {
-  opacity: 0.75;
-  transform: scale(0.95);
-  transition: all 0.3s ease;
-}
-
-.swiper-slide-active {
-  opacity: 1;
-  transform: scale(1);
-}
-.swiper-button-next,
-.swiper-button-prev {
-  color: #3b82f6;
-  transform: scale(0.8);
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  transform: scale(1);
-}
-.swiper-slide-active {
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }

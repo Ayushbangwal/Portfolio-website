@@ -35,7 +35,9 @@ const BackToTop = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 group"
+          className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-blue-500 
+to-purple-600 text-white rounded-full shadow-lg hover:opacity-90 
+transition-all duration-300 z-40 group"
           title="Back to top"
         >
           <ArrowUp size={20} className="group-hover:animate-bounce" />
