@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, MessageSquare } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, MessageSquare, CheckCircle, AlertCircle } from 'lucide-react';
+
+// ✅ APNI VALUES YAHAN DAALO
+const EMAILJS_SERVICE_ID = 'service_g4svgsu';
+const EMAILJS_TEMPLATE_ID = 'template_0z03zpo';
+const EMAILJS_PUBLIC_KEY = 'Cc8nttOHwG-k-pFTJ';
 
 const Contact = () => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    from_name: '',
+    from_email: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,15 +23,28 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    setSubmitStatus('');
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+     // setFormData({ name: '', email: '', message: '' });
+     setFormData({ from_name: '', from_email: '', message: '' });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setSubmitStatus('error');
+    } finally {
       setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(''), 3000);
-    }, 1500);
+      setTimeout(() => setSubmitStatus(''), 5000);
+    }
   };
 
   const containerVariants = {
@@ -61,28 +81,16 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    {
-      icon: Github,
-      href: 'https://github.com/Ayushbangwal',
-      label: 'GitHub'
-    },
-    {
-      icon: Linkedin,
-      href: 'https://www.linkedin.com/in/ayush-bangwal-a1412a323/',
-      label: 'LinkedIn'
-    },
-    {
-      icon: Twitter,
-      href: 'https://twitter.com/yourusername',
-      label: 'Twitter'
-    }
+    { icon: Github, href: 'https://github.com/Ayushbangwal', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/ayush-bangwal-a1412a323/', label: 'LinkedIn' },
+    { icon: Twitter, href: 'https://twitter.com/yourusername', label: 'Twitter' }
   ];
 
   return (
     <section id="contact" className="py-20 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -99,29 +107,25 @@ const Contact = () => {
           </motion.h2>
           <motion.div variants={itemVariants}
             className="w-32 h-1 bg-gradient-to-r from-blue-400 
-            to-purple-500 mx-auto rounded-full mb-8"
-          />
+            to-purple-500 mx-auto rounded-full mb-8"/>
           <motion.p variants={itemVariants}
             className="text-gray-300 max-w-2xl mx-auto">
-            I'm always interested in hearing about new opportunities, 
-            exciting projects, or just having a chat about technology. 
-            Feel free to reach out!
+            I'm always interested in new opportunities, exciting projects, 
+            or just a chat about technology. Feel free to reach out!
           </motion.p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
 
-          {/* LEFT — Contact Info */}
+          {/* LEFT */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div
-              variants={itemVariants}
-              className="bg-white/5 border border-white/10 rounded-2xl p-8 h-full"
-            >
+            <motion.div variants={itemVariants}
+              className="bg-white/5 border border-white/10 rounded-2xl p-8 h-full">
               <h3 className="text-2xl font-bold mb-3 text-white">
                 Let's Connect
               </h3>
@@ -130,20 +134,15 @@ const Contact = () => {
                 or just want to say hello — I'm here and ready to help!
               </p>
 
-              {/* Contact Info Cards */}
               <div className="space-y-4 mb-8">
                 {contactInfo.map((info) => {
                   const Icon = info.icon;
                   return (
-                    <motion.a
-                      key={info.label}
-                      href={info.href}
-                      variants={itemVariants}
-                      whileHover={{ x: 6 }}
-                      className="flex items-center gap-4 p-4 
-                      bg-white/5 border border-white/10 rounded-xl 
-                      hover:border-blue-500/40 hover:bg-white/10
-                      transition-all duration-300"
+                    <motion.a key={info.label} href={info.href}
+                      variants={itemVariants} whileHover={{ x: 6 }}
+                      className="flex items-center gap-4 p-4 bg-white/5 
+                      border border-white/10 rounded-xl hover:border-blue-500/40 
+                      hover:bg-white/10 transition-all duration-300"
                     >
                       <div className={`p-3 bg-white/10 rounded-lg ${info.color}`}>
                         <Icon size={20} />
@@ -152,8 +151,8 @@ const Contact = () => {
                         <span className="text-xs text-gray-400 mb-0.5">
                           {info.label}
                         </span>
-                        <div className="font-medium text-white 
-                        flex items-center gap-2 text-sm">
+                        <div className="font-medium text-white flex 
+                        items-center gap-2 text-sm">
                           {info.value}
                           {info.label === 'Email' && (
                             <button
@@ -164,8 +163,7 @@ const Contact = () => {
                                 setTimeout(() => setCopied(false), 2000);
                               }}
                               className="text-xs px-2 py-0.5 bg-blue-500/20 
-                              hover:bg-blue-500/40 text-blue-400 
-                              rounded-md transition"
+                              hover:bg-blue-500/40 text-blue-400 rounded-md transition"
                             >
                               {copied ? '✓ Copied' : 'Copy'}
                             </button>
@@ -177,24 +175,17 @@ const Contact = () => {
                 })}
               </div>
 
-              {/* Social Links */}
               <div>
                 <h4 className="text-sm font-semibold mb-4 text-gray-400 
-                uppercase tracking-wider">
-                  Follow Me
-                </h4>
+                uppercase tracking-wider">Follow Me</h4>
                 <div className="flex gap-3">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
                     return (
-                      <motion.a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <motion.a key={social.label} href={social.href}
+                        target="_blank" rel="noopener noreferrer"
                         whileHover={{ scale: 1.15, y: -3 }}
-                        whileTap={{ scale: 0.9 }}
-                        title={social.label}
+                        whileTap={{ scale: 0.9 }} title={social.label}
                         className="p-3 bg-white/5 border border-white/10 
                         rounded-xl text-gray-400 hover:text-blue-400 
                         hover:border-blue-500/40 hover:bg-blue-500/10
@@ -209,22 +200,21 @@ const Contact = () => {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — Contact Form */}
+          {/* RIGHT — Form */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div
-              variants={itemVariants}
-              className="bg-white/5 border border-white/10 rounded-2xl p-8"
-            >
-              <h3 className="text-2xl font-bold mb-6 text-white">
+            <motion.div variants={itemVariants}
+              className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
+                <MessageSquare size={22} className="text-blue-400" />
                 Send Me a Message
               </h3>
 
-              {/* Success Message */}
+              {/* Success */}
               {submitStatus === 'success' && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -232,16 +222,31 @@ const Contact = () => {
                   className="mb-6 p-4 bg-green-900/20 text-green-300 
                   rounded-xl border border-green-800 flex items-center gap-2"
                 >
-                  <MessageSquare size={18} />
-                  <span className="text-sm">
-                    Message sent! I'll get back to you soon.
+                  <CheckCircle size={18} />
+                  <span className="text-sm font-medium">
+                    Message sent! I'll get back to you within 24-48 hours. ✅
                   </span>
                 </motion.div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Error */}
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-4 bg-red-900/20 text-red-300 
+                  rounded-xl border border-red-800 flex items-center gap-2"
+                >
+                  <AlertCircle size={18} />
+                  <span className="text-sm">
+                    Something went wrong. Please try emailing directly at ayushbangwal0@gmail.com
+                  </span>
+                </motion.div>
+              )}
 
-                {/* Name */}
+              {/* ✅ form ref add kiya */}
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+
                 <div>
                   <label htmlFor="name"
                     className="block text-sm font-medium text-gray-300 mb-2">
@@ -251,8 +256,9 @@ const Contact = () => {
                     whileFocus={{ scale: 1.01 }}
                     type="text"
                     id="name"
-                    name="name"
-                    value={formData.name}
+                    name="from_name"
+                    
+                    value={formData.from_name}
                     onChange={handleChange}
                     required
                     placeholder="John Doe"
@@ -263,7 +269,6 @@ const Contact = () => {
                   />
                 </div>
 
-                {/* Email */}
                 <div>
                   <label htmlFor="email"
                     className="block text-sm font-medium text-gray-300 mb-2">
@@ -273,8 +278,9 @@ const Contact = () => {
                     whileFocus={{ scale: 1.01 }}
                     type="email"
                     id="email"
-                    name="email"
-                    value={formData.email}
+                    name="from_email"
+                    // value={formData.email}
+                    value={formData.from_email}
                     onChange={handleChange}
                     required
                     placeholder="john@example.com"
@@ -285,7 +291,6 @@ const Contact = () => {
                   />
                 </div>
 
-                {/* Message */}
                 <div>
                   <label htmlFor="message"
                     className="block text-sm font-medium text-gray-300 mb-2">
@@ -307,7 +312,6 @@ const Contact = () => {
                   />
                 </div>
 
-                {/* Submit Button */}
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
