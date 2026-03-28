@@ -11,7 +11,7 @@ import cer3 from '../assets/cer3.pdf';
 import cer4a from '../assets/cer4a.jpeg';
 import cer4b from '../assets/cer4b.jpeg';
 import cer4c from '../assets/cer4c.jpeg';
-
+import cer5 from '../assets/cer5.pdf';
 // ✅ BAHAR DEFINE KIYA — Certificates se UPAR
 const CertificateCard = ({ certificate, onSelect }) => {
   
@@ -211,7 +211,18 @@ const Certificates = () => {
       description: "Completed diploma with Semester I & II including programming, web development, and computer fundamentals.",
       skills: ["Programming", "Web Development", "Computer Fundamentals"],
       featured: true
-    }
+    },
+    {
+  id: 5,
+  title: "Cybersecurity",
+  issuer: "Tech Mahindra Foundation",
+  date: "March 2026",
+  credentialId: "05/03/2026",
+  certificateUrl: cer5,
+  description: "Completed 10-hour online skilling course on Cybersecurity offered by Tech Mahindra Foundation through Skill India Digital Hub, authorized by NSDC.",
+  skills: ["Cybersecurity", "Network Security", "Skill India", "NSDC"],
+  featured: false,
+}
   ];
 
   const containerVariants = {
