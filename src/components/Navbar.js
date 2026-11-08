@@ -1,170 +1,242 @@
+
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Github,
+  Linkedin,
+  Mail
+} from 'lucide-react';
+
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Certificates', href: '#certificates' },
+  { name: 'Stats', href: '#stats' },
+  { name: 'Contact', href: '#contact' },
+];
+
+const socialLinks = [
+  {
+    href: 'https://github.com/Ayushbangwal',
+    label: 'GitHub',
+    Icon: Github
+  },
+  {
+    href: 'https://www.linkedin.com/in/ayush-bangwal-a1412a323/',
+    label: 'LinkedIn',
+    Icon: Linkedin
+  },
+  {
+    href: 'mailto:ayushbangwal0@gmail.com',
+    label: 'Email',
+    Icon: Mail
+  }
+];
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      const sections = ['home','about','projects','certificates','stats','contact'];
+      const sections = navItems
+        .map((item) => document.getElementById(item.href.slice(1)))
+        .filter(Boolean);
+
+      let currentSection = 'home';
+
       sections.forEach((section) => {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(section);
-          }
+        if (section.getBoundingClientRect().top <= 120) {
+          currentSection = section.id;
         }
       });
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Certificates', href: '#certificates' },
-    { name: 'Stats', href: '#stats' },
-    { name: 'Contact', href: '#contact' },
-  ];
+      setActiveSection(currentSection);
+    };
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, {
+      passive: true
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleNavClick = (href) => {
     setIsMobileMenuOpen(false);
-    const id = href.replace('#', '');
-    setActiveSection(id);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+
+    const section = document.getElementById(href.slice(1));
+
+    if (section) {
+      const top =
+        section.getBoundingClientRect().top +
+        window.scrollY - 80;
+
+      window.scrollTo({
+        top,
+        behavior: 'smooth'
+      });
+
+      setActiveSection(href.slice(1));
+    }
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-gray-900/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+    <nav
+      className="fixed top-0 left-0 right-0 z-50
+      bg-[#111827]/95 backdrop-blur-sm
+      border-b border-white/10"
+      aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <motion.div whileHover={{ scale: 1.05 }}>
-            <h1 className="text-xl font-bold bg-gradient-to-r 
-            from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Ayush Bangwal
-            </h1>
-          </motion.div>
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('#home');
+            }}
+            className="text-xl font-semibold text-white
+            tracking-tight hover:text-blue-400
+            transition-colors duration-200"
+          >
+            Ayush Bangwal
+          </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-baseline space-x-1">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => handleNavClick(item.href)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium 
-                transition-all duration-200 ${
-                  activeSection === item.href.replace('#', '')
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                {item.name}
-              </button>
-            ))}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-7">
+
+            {navItems.map((item) => {
+              const isActive =
+                activeSection === item.href.slice(1);
+
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item.href);
+                  }}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={`text-sm font-medium py-2
+                  border-b-2 transition-colors duration-200
+                  ${
+                    isActive
+                      ? 'text-white border-blue-400'
+                      : 'text-gray-400 border-transparent hover:text-white'
+                  }`}
+                >
+                  {item.name}
+                </a>
+              );
+            })}
+
           </div>
 
-          {/* Social Icons */}
-          <div className="hidden md:flex items-center space-x-3">
-            {[
-              { href: 'https://github.com/Ayushbangwal', Icon: Github },
-              { href: 'https://www.linkedin.com/in/ayush-bangwal-a1412a323/', Icon: Linkedin },
-              { href: 'mailto:ayushbangwal0@gmail.com', Icon: Mail }
-            ].map(({ href, Icon }) => (
-              <motion.a
-                key={href}
+          {/* Social Links */}
+          <div className="hidden md:flex items-center gap-2">
+
+            {socialLinks.map(({ href, label, Icon }) => (
+              <a
+                key={label}
                 href={href}
+                aria-label={label}
                 target={href.startsWith('http') ? '_blank' : undefined}
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.15, y: -2 }}
-                className="p-2 text-gray-400 hover:text-blue-400 
-                bg-white/5 hover:bg-blue-500/10 border border-white/10 
-                hover:border-blue-500/30 rounded-lg transition-all duration-300"
+                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="p-2 text-gray-400
+                hover:text-white transition-colors duration-200"
               >
-                <Icon size={16} />
-              </motion.a>
+                <Icon size={19} strokeWidth={1.8} />
+              </a>
             ))}
+
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg text-gray-400 hover:text-white 
-              hover:bg-white/10 border border-white/10 transition-all"
-            >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-gray-300
+            hover:text-white transition-colors"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen
+              ? <X size={23} />
+              : <Menu size={23} />
+            }
+          </button>
+
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10, height: 0 }}
-              animate={{ opacity: 1, y: 0, height: 'auto' }}
-              exit={{ opacity: 0, y: -10, height: 0 }}
-              className="md:hidden bg-gray-900/95 border border-white/10 
-              rounded-xl mt-2 p-4 overflow-hidden"
-            >
-              <div className="space-y-1">
-                {navItems.map((item) => (
-                  <button
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-white/10 py-4">
+
+            <div className="flex flex-col">
+
+              {navItems.map((item) => {
+                const isActive =
+                  activeSection === item.href.slice(1);
+
+                return (
+                  <a
                     key={item.name}
-                    onClick={() => handleNavClick(item.href)}
-                    className={`block w-full text-left px-4 py-2.5 rounded-lg 
-                    text-sm font-medium transition-all duration-200 ${
-                      activeSection === item.href.replace('#', '')
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.href);
+                    }}
+                    aria-current={isActive ? 'location' : undefined}
+                    className={`px-3 py-3 text-sm font-medium
+                    border-l-2 transition-colors duration-200
+                    ${
+                      isActive
+                        ? 'text-white border-blue-400 bg-white/5'
+                        : 'text-gray-400 border-transparent hover:text-white'
                     }`}
                   >
                     {item.name}
-                  </button>
-                ))}
-              </div>
-              <div className="mt-4 pt-4 border-t border-white/10 
-              flex justify-center gap-3">
-                {[
-                  { href: 'https://github.com/Ayushbangwal', Icon: Github },
-                  { href: 'https://www.linkedin.com/in/ayush-bangwal-a1412a323/', Icon: Linkedin },
-                  { href: 'mailto:ayushbangwal0@gmail.com', Icon: Mail }
-                ].map(({ href, Icon }) => (
-                  <a key={href} href={href}
-                    target={href.startsWith('http') ? '_blank' : undefined}
-                    rel="noopener noreferrer"
-                    className="p-2.5 text-gray-400 hover:text-blue-400 
-                    bg-white/5 rounded-lg border border-white/10 
-                    transition-all duration-300"
-                  >
-                    <Icon size={18} />
                   </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                );
+              })}
+
+            </div>
+
+            {/* Mobile Social Links */}
+            <div className="flex items-center gap-5 mt-4
+            pt-4 px-3 border-t border-white/10">
+
+              {socialLinks.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="text-gray-400 hover:text-white
+                  transition-colors duration-200"
+                >
+                  <Icon size={19} />
+                </a>
+              ))}
+
+            </div>
+
+          </div>
+        )}
+
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

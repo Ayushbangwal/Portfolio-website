@@ -1,211 +1,135 @@
+
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowDown, Download, ExternalLink } from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Download,
+  ArrowUpRight
+} from 'lucide-react';
+
 import profile from "../assets/profile.png";
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
-  };
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
-<div className="absolute top-40 right-20 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
-<div className="absolute -bottom-8 left-40 w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
-        
-      </div>
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center
+      bg-gray-900 text-white px-4 sm:px-6 lg:px-8 pt-24 pb-16"
+    >
+      <div className="max-w-5xl w-full mx-auto flex flex-col
+      items-center text-center">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center"
-        >
-          {/* Profile Image */}
-          <motion.div
-            variants={itemVariants}
-            className="mb-8">
+        {/* Profile Image */}
+        <div className="mb-8">
+          <img
+            src={profile}
+            alt="Ayush Bangwal"
+            className="w-36 h-36 sm:w-40 sm:h-40
+            rounded-full object-cover
+            border border-gray-700"
+          />
+        </div>
 
-            <div className="relative inline-block group">
-  
-  {/* 🔥 Gradient Glow */}
-  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 
-to-pink-500 rounded-full blur-md opacity-30 group-hover:opacity-70 transition duration-300"></div>
+        {/* Introduction */}
+        <p className="text-sm font-medium tracking-widest
+        uppercase text-blue-400 mb-4">
+          B.Tech CSE Student · Web Developer
+        </p>
 
-  {/* 🖼️ Profile Image */}
-    <div className="relative w-40 h-40 rounded-full overflow-hidden border-4 border-blue-400/40">
-    <img
-      src={profile}
-      alt="Profile"
-      className="w-full h-full object-cover brightness-95 contrast-105 
-      transform group-hover:scale-105 transition duration-300 ease-in-out"
-    />
-  </div>
+        {/* Name */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl
+        font-bold tracking-tight mb-5">
+          Hi, I'm Ayush Bangwal.
+        </h1>
 
-  {/* 🟢 Online Dot */}
-  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-400 rounded-full 
-  border-4 border-gray-900 shadow-md shadow-green-400/40"></div>
+        {/* Description */}
+        <p className="max-w-2xl text-base sm:text-lg
+        leading-8 text-gray-400 mb-8">
+          I build web applications using React and JavaScript,
+          and work with backend technologies and databases.
+          I enjoy learning new technologies and improving my
+          development skills through practical projects.
+        </p>
 
-</div>
-          </motion.div>
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row
+        items-center justify-center gap-3 mb-10">
 
-          {/* Name and Title */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl md:text-7xl font-bold mb-4"
+          <a
+            href="#projects"
+            className="inline-flex items-center justify-center
+            gap-2 px-7 py-3 rounded-md
+            bg-blue-600 text-white font-medium
+            hover:bg-blue-700 transition-colors duration-200"
           >
-            <span className="bg-gradient-to-r from-blue-400 
-via-purple-400 to-blue-400 bg-clip-text text-transparent">
-  Ayush Bangwal
-</span>
-          </motion.h1>
+            View Projects
+            <ArrowUpRight size={18} />
+          </a>
 
-          <motion.h2
-  variants={itemVariants}
-  className="text-2xl md:text-3xl text-gray-300 mb-4"
->
-  <TypeAnimation
-    sequence={[
-      'Full Stack Developer', 4000,
-      'React Developer', 4000,
-      'Node.js Developer', 4000,
-      'AI Enthusiast', 4000,
-      'Open Source Contributor', 4000,
-    ]}
-    wrapper="span"
-    speed={50}
-    deletingSpeed={70}
-    repeat={Infinity}
-    cursor={true}
-  />
-</motion.h2>
-
-<motion.p
-  variants={itemVariants}
-  className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto"
->
-  Building scalable web apps and AI-based projects 
-</motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          <a
+            href="#contact"
+            className="inline-flex items-center justify-center
+            gap-2 px-7 py-3 rounded-md
+            border border-gray-600 text-gray-200 font-medium
+            hover:border-gray-400 hover:text-white
+            transition-colors duration-200"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-               className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg 
-              shadow-lg hover:opacity-90 transition-all duration-300 
-              flex items-center justify-center gap-2"
-            >
-              View Projects
-              <ExternalLink size={20} />
-            </motion.button>
+            Contact Me
+            <Mail size={18} />
+          </a>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 bg-transparent border-2 
-  border-blue-500 text-blue-400 font-semibold 
-  rounded-lg hover:bg-blue-500 hover:text-white 
-  transition-all duration-300 flex items-center 
-  justify-center gap-2"
-            >
-              Contact Me
-              <Mail size={20} />
-            </motion.button>
-
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="/resume.pdf"
-              download
-              className="px-8 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-700 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              Download CV
-              <Download size={20} />
-            </motion.a>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center space-x-6"
+          <a
+            href="/resume.pdf"
+            download
+            className="inline-flex items-center justify-center
+            gap-2 px-7 py-3 rounded-md
+            border border-gray-700 text-gray-300 font-medium
+            hover:bg-gray-800 hover:text-white
+            transition-colors duration-200"
           >
-            <motion.a
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              href="https://github.com/Ayushbangwal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-400 transition-colors"
+            Download CV
+            <Download size={18} />
+          </a>
 
-            >
-              <Github size={24} />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.2, rotate: -5 }}
-              href="https://linkedin.com/in/ayush-bangwal-a1412a323/"
-              target="_blank"
-              rel="noopener noreferrer"
-              
-              className="text-gray-400 hover:text-blue-400 transition-colors"
+        </div>
 
-            >
-              <Linkedin size={24} />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              href="mailto:ayushbangwal0@gmail.com"
-              
-              className="text-gray-400 hover:text-blue-400 transition-colors"
-            >
-              <Mail size={24} />
-            </motion.a>
-          </motion.div>
-        </motion.div>
+        {/* Social Links */}
+        <div className="flex items-center justify-center gap-7">
 
-        {/* Scroll Down Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="text-gray-400"
+          <a
+            href="https://github.com/Ayushbangwal"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="text-gray-400 hover:text-white
+            transition-colors duration-200"
           >
-            <ArrowDown size={24} />
-          </motion.div>
-        </motion.div>
+            <Github size={22} />
+          </a>
+
+          <a
+            href="https://linkedin.com/in/ayush-bangwal-a1412a323/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="text-gray-400 hover:text-white
+            transition-colors duration-200"
+          >
+            <Linkedin size={22} />
+          </a>
+
+          <a
+            href="mailto:ayushbangwal0@gmail.com"
+            aria-label="Email"
+            className="text-gray-400 hover:text-white
+            transition-colors duration-200"
+          >
+            <Mail size={22} />
+          </a>
+
+        </div>
+
       </div>
     </section>
   );
