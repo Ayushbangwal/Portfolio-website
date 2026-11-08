@@ -35,4 +35,3 @@ const LoadingScreen = () => {
 };
 
 export default LoadingScreen;
-git status --short
